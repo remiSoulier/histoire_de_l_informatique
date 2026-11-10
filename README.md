@@ -4,9 +4,12 @@ Site statique retraçant l'histoire de l'informatique, réalisé en équipe dans
 
 ## Présentation
 
-- **Équipe** : à compléter (noms et comptes GitHub)
-- **Responsable du dépôt** : à compléter
-- **Contenu** : une page d'accueil avec une frise chronologique, et une page par membre (une époque, une personnalité, une invention…)
+- **Équipe** : ROGET Elora, SOULIER Rémi, PATRIGOT Elysabeth, BROCHETTA Aurélien
+- **Responsable du dépôt** : SOULIER Rémi
+- **Contenu** : une page d'accueil qui présente Ada Lovelace et qui redirige vers les pages suivantes : 
+- Page de sa jeunesse et de sa formation
+- Page de sa création de la machine analytique et le premier algorithme
+- Page de sa fin de vie et de son héritage moderne
 
 ## Installation
 
@@ -33,7 +36,7 @@ Personne ne pousse directement sur `main` ou `develop`.
 
 ### Convention de commit
 
-À compléter par l'équipe (par exemple Conventional Commits : `feat: ajoute la page Turing`).
+Conventional Commits : `feat: ajoute la page Turing`.
 
 ### Relecture
 
@@ -41,9 +44,6 @@ Toute modification passe par une **Pull Request** vers `develop`, qui :
 
 - référence son issue (`Closes #3`)
 - est relue par au moins un autre membre de l'équipe
-- n'est fusionnée que si la CI est verte
-
-À compléter : qui relit les Pull Requests de qui ?
 
 ### Ajouter sa page
 
