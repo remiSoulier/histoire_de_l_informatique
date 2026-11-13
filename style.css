@@ -90,6 +90,46 @@ a:hover {
   color: var(--couleur-accent);
 }
 
+/* ===== Portrait et biographie ===== */
+
+.presentation {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin: 1rem 0 2.5rem;
+}
+
+.presentation img {
+  flex: 0 0 14rem;
+  width: 14rem;
+  height: auto;
+  border-radius: 0.75rem;
+  border: 4px solid #fff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.presentation p {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+/* Sur petit écran : le portrait passe au-dessus du texte */
+@media (max-width: 40rem) {
+  .presentation {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .presentation img {
+    flex-basis: auto;
+    width: min(14rem, 70%);
+  }
+
+  .presentation p {
+    text-align: left;
+  }
+}
+
 /* ===== Pied de page ===== */
 
 footer {
