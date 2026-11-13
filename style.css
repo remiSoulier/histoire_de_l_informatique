@@ -3,10 +3,11 @@
   --couleur-texte-doux: #5b6770;
   --couleur-fond: #fdfdfb;
   --couleur-accent: #2fb8c5;
+
   /* Version foncée de l'accent : lisible sur fond clair (contraste AA) */
   --couleur-accent-fonce: #13707a;
   --couleur-bordure: #e6eef0;
-  --police-titres: Georgia, "Times New Roman", serif;
+  --police-titres: georgia, "Times New Roman", serif;
   --largeur-max: 48rem;
 }
 
@@ -105,7 +106,11 @@ a:hover {
   height: auto;
   border-radius: 0.75rem;
   border: 4px solid #fff;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 6px 18px rgb(0 0 0 / 12%);
+}
+
+footer p {
+  margin: 0.25rem 0;
 }
 
 .presentation p {
@@ -114,40 +119,28 @@ a:hover {
 }
 
 /* Sur petit écran : le portrait passe au-dessus du texte */
-@media (max-width: 40rem) {
+@media (width <= 40rem) {
   .presentation {
     flex-direction: column;
     text-align: center;
   }
-
-  .presentation img {
-    flex-basis: auto;
-    width: min(14rem, 70%);
-  }
-
-  .presentation p {
-    text-align: left;
-  }
 }
 
+
+footer p:first-child {
+  font-weight: 600;
+  color: var(--couleur-texte);
+}
+
+{
 /* ===== Pied de page ===== */
 
-footer {
   margin-top: 3rem;
   padding: 1.5rem 0 2rem;
   border-top: 1px solid var(--couleur-bordure);
   font-size: 0.9rem;
   text-align: center;
   color: var(--couleur-texte-doux);
-}
-
-footer p {
-  margin: 0.25rem 0;
-}
-
-footer p:first-child {
-  font-weight: 600;
-  color: var(--couleur-texte);
 }
 
 /* ===== Frise chronologique ===== */
@@ -188,7 +181,7 @@ footer p:first-child {
   background-color: #fff;
   border: 1px solid var(--couleur-bordure);
   border-radius: 0.75rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 6px rgb(0 0 0 / 5%);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -253,10 +246,14 @@ footer p:first-child {
 .frise li:hover,
 .frise li:focus-within {
   transform: translateX(6px);
-  box-shadow: 0 6px 18px rgba(47, 184, 197, 0.2);
+  box-shadow: 0 6px 18px rgb(47 184 197 / 20%);
 }
 
 .frise li:hover::before,
+.frise a:focus-visible {
+  outline: none;
+}
+
 .frise li:focus-within::before {
   background-color: var(--couleur-accent);
   transform: scale(1.15);
@@ -267,9 +264,6 @@ footer p:first-child {
   color: var(--couleur-accent-fonce);
 }
 
-.frise a:focus-visible {
-  outline: none;
-}
 
 .frise li:focus-within {
   outline: 3px solid var(--couleur-accent);
