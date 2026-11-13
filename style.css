@@ -1,8 +1,13 @@
 :root {
   --couleur-texte: #222;
+  --couleur-texte-doux: #5b6770;
   --couleur-fond: #fdfdfb;
   --couleur-accent: #2fb8c5;
-  --largeur-max: 60rem;
+  /* Version foncée de l'accent : lisible sur fond clair (contraste AA) */
+  --couleur-accent-fonce: #13707a;
+  --couleur-bordure: #e6eef0;
+  --police-titres: Georgia, "Times New Roman", serif;
+  --largeur-max: 48rem;
 }
 
 * {
@@ -11,40 +16,270 @@
 
 body {
   margin: 0 auto;
-  padding: 1rem;
+  padding: 0 1rem;
   max-width: var(--largeur-max);
-  font-family: system-ui, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
   line-height: 1.6;
   color: var(--couleur-texte);
   background-color: var(--couleur-fond);
+  background-image: radial-gradient(
+    circle at top,
+    color-mix(in srgb, var(--couleur-accent) 12%, transparent),
+    transparent 28rem
+  );
+  background-repeat: no-repeat;
 }
 
-header,
-footer {
-  padding: 1rem 0;
+main {
+  flex: 1;
+}
+
+/* ===== En-tête ===== */
+
+header {
+  padding: 3.5rem 0 2rem;
+  text-align: center;
+}
+
+header::after {
+  content: "";
+  display: block;
+  width: 4rem;
+  height: 4px;
+  margin: 1.5rem auto 0;
+  border-radius: 2px;
+  background-color: var(--couleur-accent);
+}
+
+h1,
+h2 {
+  font-family: var(--police-titres);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--couleur-accent-fonce);
 }
 
 h1 {
-  color: var(--couleur-accent);
+  margin: 0 0 0.5rem;
+  font-size: clamp(2rem, 6vw, 3rem);
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+header > p {
+  margin: 0;
+  font-size: 1.15rem;
+  font-style: italic;
+  color: var(--couleur-texte-doux);
+}
+
+h2 {
+  margin: 2rem 0 1rem;
+  font-size: 1.6rem;
 }
 
 a {
+  color: var(--couleur-accent-fonce);
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
   color: var(--couleur-accent);
 }
 
+/* ===== Portrait et biographie ===== */
+
+.presentation {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin: 1rem 0 2.5rem;
+}
+
+.presentation img {
+  flex: 0 0 14rem;
+  width: 14rem;
+  height: auto;
+  border-radius: 0.75rem;
+  border: 4px solid #fff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.presentation p {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+/* Sur petit écran : le portrait passe au-dessus du texte */
+@media (max-width: 40rem) {
+  .presentation {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .presentation img {
+    flex-basis: auto;
+    width: min(14rem, 70%);
+  }
+
+  .presentation p {
+    text-align: left;
+  }
+}
+
+/* ===== Pied de page ===== */
+
+footer {
+  margin-top: 3rem;
+  padding: 1.5rem 0 2rem;
+  border-top: 1px solid var(--couleur-bordure);
+  font-size: 0.9rem;
+  text-align: center;
+  color: var(--couleur-texte-doux);
+}
+
+footer p {
+  margin: 0.25rem 0;
+}
+
+footer p:first-child {
+  font-weight: 600;
+  color: var(--couleur-texte);
+}
+
+/* ===== Frise chronologique ===== */
+
 .frise {
+  position: relative;
   list-style: none;
-  padding-left: 0;
-  border-left: 4px solid var(--couleur-accent);
+  margin: 2rem 0;
+  padding: 0;
 }
 
+/* La ligne verticale */
+.frise::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 1rem;
+  width: 4px;
+  border-radius: 2px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--couleur-accent) 8%,
+    var(--couleur-accent) 92%,
+    transparent
+  );
+}
+
+/* Chaque étape = une carte */
 .frise li {
-  margin: 0 0 1.5rem;
-  padding-left: 1rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin: 0 0 1.5rem 3rem;
+  padding: 1rem 1.25rem;
+  background-color: #fff;
+  border: 1px solid var(--couleur-bordure);
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+/* Le point sur la ligne */
+.frise li::before {
+  content: "";
+  position: absolute;
+  top: 1.4rem;
+  left: calc(-2rem + 2px - 0.625rem);
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  background-color: var(--couleur-fond);
+  border: 4px solid var(--couleur-accent);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+/* Petite flèche qui relie la carte au point */
+.frise li::after {
+  content: "";
+  position: absolute;
+  top: 1.6rem;
+  left: -0.5rem;
+  width: 0.9rem;
+  height: 0.9rem;
+  background-color: #fff;
+  border-left: 1px solid var(--couleur-bordure);
+  border-bottom: 1px solid var(--couleur-bordure);
+  transform: rotate(45deg);
+}
+
+/* Les années en badge */
 .annee {
-  display: inline-block;
-  margin-right: 0.5rem;
+  width: fit-content;
+  padding: 0.15rem 0.75rem;
+  font-size: 0.85rem;
   font-weight: bold;
+  letter-spacing: 0.03em;
+  color: var(--couleur-accent-fonce);
+  background-color: color-mix(in srgb, var(--couleur-accent) 15%, white);
+  border-radius: 999px;
+}
+
+/* Le titre de l'étape */
+.frise a {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--couleur-texte);
+  text-decoration: none;
+}
+
+/* Toute la carte devient cliquable */
+.frise a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: 0.75rem;
+}
+
+/* Survol et focus clavier */
+.frise li:hover,
+.frise li:focus-within {
+  transform: translateX(6px);
+  box-shadow: 0 6px 18px rgba(47, 184, 197, 0.2);
+}
+
+.frise li:hover::before,
+.frise li:focus-within::before {
+  background-color: var(--couleur-accent);
+  transform: scale(1.15);
+}
+
+.frise li:hover a,
+.frise li:focus-within a {
+  color: var(--couleur-accent-fonce);
+}
+
+.frise a:focus-visible {
+  outline: none;
+}
+
+.frise li:focus-within {
+  outline: 3px solid var(--couleur-accent);
+  outline-offset: 3px;
+}
+
+/* Respect des préférences d'animation */
+@media (prefers-reduced-motion: reduce) {
+  .frise li,
+  .frise li::before {
+    transition: none;
+  }
 }
